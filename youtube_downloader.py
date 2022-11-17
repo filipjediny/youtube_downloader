@@ -19,10 +19,16 @@ while(True):
         yt = Playlist(src)
         print("Downloading playlist: "+yt.title)
         for video in yt.videos:
-            video.streams.get_audio_only().download("pytube_downloads\\"+yt.title,gen_filename(video))
+            try:
+                video.streams.get_audio_only().download("pytube_downloads\\"+yt.title,gen_filename(video))
+            except:
+                print("A video couldn't be downloaded.")
         print("Done. Ctrl+C to close the console or enter another url.")
     else:
         yt = YouTube(src)
         print("Downloading video: "+yt.title)
-        yt.streams.get_audio_only().download("pytube_downloads",gen_filename(yt))
+        try:
+            yt.streams.get_audio_only().download("pytube_downloads",gen_filename(yt))
+        except:
+            print("Video couldn't be downloaded.")
         print("Done. Ctrl+C to close the console or enter another url.")
